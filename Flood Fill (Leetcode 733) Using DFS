@@ -1,0 +1,20 @@
+class Solution {
+    int directions[][] = {{0 , -1} , {-1 , 0} , {0 , 1} , {1 , 0}};
+    public void dfs(int i , int j , int initial , int color , boolean[][] visited , int[][] image) {
+        visited[i][j] = true;
+        image[i][j] = color;
+        for(int dir[] : directions) {
+            int x = i + dir[0];
+            int y = j + dir[1];
+            if(x >= 0 && x < image.length && y >= 0 && y < image[0].length && image[x][y] == initial && !visited[x][y]) 
+                dfs(x , y , initial , color , visited , image);
+        }
+    }
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {        
+        int n = image.length;
+        int m = image[0].length;
+        boolean visited[][] = new boolean[n][m];
+        dfs(sr , sc , image[sr][sc] , color , visited , image);
+        return image;
+    }
+}
